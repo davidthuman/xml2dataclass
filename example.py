@@ -5,7 +5,6 @@ class VoteTally:
     yeas: str
     nays: str
 
-from dataclasses import dataclass
 @dataclass
 class Vote:
 
@@ -17,13 +16,11 @@ class Vote:
     vote_tally: VoteTally
     title: str
 
-from dataclasses import dataclass
 @dataclass
 class Votes:
 
     votes: list[Vote]
 
-from dataclasses import dataclass
 @dataclass
 class VoteSummary:
 
