@@ -28,6 +28,7 @@ def arguments() -> ArgumentData:
     """
 
     parser = argparse.ArgumentParser(
+        prog='xml2dataclass',
         description='xml2dataclass - Code Gen to convert XML structure into Python Dataclasses'
     )
 
