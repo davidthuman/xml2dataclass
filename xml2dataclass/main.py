@@ -7,6 +7,7 @@
 import xml.etree.ElementTree as ET
 import sys
 import logging
+from collections.abc import Callable
 
 # Internal Libraries
 
@@ -111,14 +112,26 @@ def to_data_classes(root: ET.Element) -> list[DataClass]:
 
 
 def generate_py_file_str(data_classes: list[DataClass]) -> str:
-
-    py_file_str = "from dataclasses import dataclass\n"
-
-    for data_class in data_classes:
-
-        py_file_str += data_class.to_py_str()
-
+    
+    py_file_str = ""        
+    
+    def write(s: str):
+        nonlocal py_file_str
+        py_file_str += s
+    
+    write_py(write, data_classes)
+    
     return py_file_str
+
+def write_py(write: Callable[[str], int], dataclasses: list[DataClass]):
+    """ Writes the given dataclasses using the given write function """
+    
+    write('""" This module was generated from xml2dataclass """\n')
+    write("\n")
+    write("from dataclasses import dataclass\n")
+    write("\n")
+    for dc in dataclasses:
+        write(dc.to_py_str())
 
 
 def main():
@@ -140,11 +153,7 @@ def main():
 
         case Out.FILE_PATH:
             with open(arg_data.args.output, "a", encoding="utf-8") as f:
-                f.write("from dataclasses import dataclass\n")
-                for dc in dcs:
-                    f.write(dc.to_py_str())
+                write_py(f.write, dcs)
 
         case Out.STDOUT:
-            sys.stdout.write("from dataclasses import dataclass\n")
-            for dc in dcs:
-                sys.stdout.write(dc.to_py_str())
+            write_py(sys.stdout.write, dcs)

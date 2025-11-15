@@ -97,12 +97,15 @@ class CliTestCase(unittest.TestCase):
             f"\n{completed_process.stderr.decode('utf-8')}",
         )
 
-        expected = """from dataclasses import dataclass
+        expected = '''""" This module was generated from xml2dataclass """
+
+from dataclasses import dataclass
+
 @dataclass
 class Data:
 
 
-"""
+'''
 
         actual = completed_process.stdout.decode('utf-8')
 

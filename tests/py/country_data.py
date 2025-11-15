@@ -1,4 +1,7 @@
+""" This module was generated from xml2dataclass """
+
 from dataclasses import dataclass
+
 @dataclass
 class Neighbor:
 

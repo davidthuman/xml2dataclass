@@ -23,10 +23,21 @@ options:
 The XML structure can be given to the command by either using the `xml` positional argument, specifying a file path with the `--file` argument, piping the XML structure through stdin
 
 ```
-echo '<?xml version="1.0"?><data/>' | xml2dataclass
+$ echo '<?xml version="1.0"?><data/>' | xml2dataclass
+""" This module was generated from xml2dataclass """
 
 from dataclasses import dataclass
+
 @dataclass
 class Data:
+
+
 ```
 
+## Tests
+
+To run the test suite, you can run the command
+
+```sh
+make test
+```
