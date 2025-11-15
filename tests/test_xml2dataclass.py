@@ -71,6 +71,34 @@ class SenateVoteMenuTestCase(unittest.TestCase):
                 )
             )
             
+class KeywordTestCase(unittest.TestCase):
+    """ Test class for unit tests on 'keyword' data """
+    
+    def setUp(self):
+        self.root = ET.parse("tests/xml/keywords.xml").getroot()
+    
+    def test_output_senate_vote_menu(self):
+        
+        with open("tests/py/keywords.py", "r", encoding="utf-8") as f:
+            
+            expected = f.read()
+            actual = generate_py_file_str(
+                to_data_classes(
+                    self.root
+                )
+            )
+            
+            self.assertEqual(
+                first=expected,
+                second=actual,
+                msg=''.join(
+                    difflib.ndiff(
+                        expected.splitlines(keepends=True),
+                        actual.splitlines(keepends=True)
+                    )
+                )
+            )
+            
 class CliTestCase(unittest.TestCase):
     """ Test class for CLI testing """
 

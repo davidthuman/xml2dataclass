@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<test>
+    <return>
+        <if>else</if>
+        <else>100</else>
+        <for continue="Cont">
+            <class>string</class>
+            <def>0</def>
+        </for>
+    </return>
+    <return>
+        <if>if</if>
+        <else>500</else>
+        <for continue="Cont">
+            <class>number</class>
+            <def>2</def>
+        </for>
+    </return>
+</test>

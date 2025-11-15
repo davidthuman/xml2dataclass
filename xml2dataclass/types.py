@@ -1,6 +1,7 @@
 """ This module contains types """
 
 from dataclasses import dataclass
+import keyword
 
 ### Data Structures ###
 
@@ -17,6 +18,9 @@ class FieldLite:
         Returns:
             str: Python syntax of the dataclass field
         """
+        if keyword.iskeyword(self.name):
+            return f"{self.name}_: {self.type_hint}"
+        
         return f"{self.name}: {self.type_hint}"
 
 @dataclass
